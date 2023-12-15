@@ -6,10 +6,11 @@
         {% for file in files %}
         <li>
             {{file.file.name}}
-            <a href="#">: download</a>
+            <a href="{% url 'file_app:download' file.id  %}">: download</a>
         </li>
         {% empty %}
         <p>No files yet</p>
         {% endfor %}
     </ul>
+    <a href="{% url 'file_app:upload' %}">upload file</a>
 {% endblock content %}
