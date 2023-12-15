@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.http import FileResponse
 from .forms import UploadFileForm
 from .models import  UploadFile
@@ -22,7 +22,7 @@ def upload_file(request):
         
 
 def download_file(request, file_id):
-    uploaded_file =UploadFile.objects.get(pk=file_id)
+    uploaded_file = get_object_or_404(UploadFile, pk=file_id)
     response = FileResponse(uploaded_file.file, as_attachment=True)
     return response
 
