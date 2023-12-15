@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}list of uploaded files{% endblock title %}
+{% block content %}
+<h2>File List<h2>
+    <ul>
+        {% for file in files %}
+        <li>
+            {{file.file.name}}
+            <a href="#">: download</a>
+        </li>
+        {% empty %}
+        <p>No files yet</p>
+        {% endfor %}
+    </ul>
+{% endblock content %}
