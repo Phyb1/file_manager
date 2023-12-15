@@ -4,7 +4,7 @@ upload your file
 {% endblock title %}
 {% block content %}
 <h2>upload file</h2>
-<form>
+<form enctype='multipart/form-data' method='post'>
     {{form.as_p}}
     {% csrf_token %}
     <input type='submit' value ='Upload'>
