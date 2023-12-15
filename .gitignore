@@ -1,0 +1,6 @@
+db.sqlite3
+file_app/__pycache__
+file_app/migrations/__pycache__
+file_app/migrations/__init__.py
+file_app/__init__.py
+file_manager/__pycache__
