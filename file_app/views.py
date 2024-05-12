@@ -5,7 +5,8 @@ from django.http import FileResponse
 from django.core.paginator import Paginator
 from .forms import UploadFileForm
 from .models import UploadFile
-
+from django.http import JsonResponse
+ 
 class FileListView(ListView):
     model = UploadFile
     template_name = 'file_list.html'
@@ -55,3 +56,11 @@ class FileUploadView(View):
             form.save()
             return redirect('file_app:file_list')
         return render(request, 'upload_file.html', {'form': form})
+
+
+def get_upload_progress(request):
+    if 'upload_progress' in request.session:
+        progress = request.session['upload_progress']
+    else:
+        progress = 0
+    return JsonResponse({'progress': progress})
