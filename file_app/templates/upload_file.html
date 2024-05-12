@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% block title %}
-upload your file
+Upload Your File
 {% endblock title %}
 {% block content %}
-<h2>upload file</h2>
-<form enctype='multipart/form-data' method='post'>
-    {{form.as_p}}
+<h2>Upload File</h2>
+<form enctype="multipart/form-data" method="post">
     {% csrf_token %}
-    <input type='submit' value ='Upload'>
+    <div class="form-group">
+        <label for="{{ form.file.id_for_label }}">File:</label>
+        {{ form.file }}
+        <small class="form-text text-muted">Select a file to upload.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
 </form>
 {% endblock content %}
