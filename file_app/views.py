@@ -54,7 +54,7 @@ class FileUploadView(View):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('file_app:file_list')
+            return redirect('file_app:check_progress')
         return render(request, 'upload_file.html', {'form': form})
 
 
