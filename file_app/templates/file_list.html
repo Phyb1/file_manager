@@ -1,16 +1,49 @@
 {% extends "base.html" %}
-{% block title %}list of uploaded files{% endblock title %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+{% endblock %}
+
+{% block title %}Download files{% endblock title %}
+
 {% block content %}
-<h2>File List<h2>
-    <ul>
+<h2>File List</h2>
+<div>
+    <p>Sort by:
+        <a href="#" class="sort" data-sort-by="date">Date</a> |
+        <a href="#" class="sort" data-sort-by="file_type">File Type</a> |
+        <a href="#" class="sort" data-sort-by="size">Size</a>
+    </p>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>File Name</th>
+            <th>Upload Date</th>
+            <th>File Type</th>
+            <th>File Size</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for file in files %}
-        <li>
-            {{file.file.name}}
-            <a href="{% url 'file_app:download' file.id  %}">: download</a>
-        </li>
+        <tr>
+            <td>{{ file.file.name }}</td>
+            <td>{{ file.upload_date }}</td>
+            <td>{{ file.file.name|split:"."|last }}</td>  <!-- Extract file extension -->
+            <td>{{ file.file.size }}</td>
+            <td><a href="{% url 'file_app:download' file.id %}">Download</a></td>
+        </tr>
         {% empty %}
-        <p>No files yet</p>
+        <tr>
+            <td colspan="5">No files yet</td>
+        </tr>
         {% endfor %}
-    </ul>
-    <a href="{% url 'file_app:upload' %}">upload file</a>
+    </tbody>
+</table>
+<a href="{% url 'file_app:upload' %}" class="btn btn-primary">Upload File</a>
 {% endblock content %}
+
+{% block extra_js %}
+<script src="{% static 'index.js' %}"></script>
+{% endblock %}
+
